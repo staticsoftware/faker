@@ -466,8 +466,9 @@ class BaseProvider:
         """
         use_weighting = use_weighting if use_weighting is not None else self.__use_weighting__
 
-        #if isinstance(elements, dict) and not isinstance(elements, OrderedDict):
-        #    raise ValueError("Use OrderedDict only to avoid dependency on PYTHONHASHSEED (See #363).")
+        if isinstance(elements, dict) and not isinstance(elements, OrderedDict):
+            elements = OrderedDict(elements)
+            #raise ValueError("Use OrderedDict only to avoid dependency on PYTHONHASHSEED (See #363).")
 
         fn = choices_distribution_unique if unique else choices_distribution
 
